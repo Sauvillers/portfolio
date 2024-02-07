@@ -1,0 +1,12 @@
+---
+export interface Props {
+    paragraphs: string[];
+}
+
+const { 
+    paragraphs,
+} = Astro.props;
+---
+<footer class="px-12 py-6">
+    { paragraphs.map(paragraph => <p data-animation="fade-up" set:html={paragraph}/> ) }
+</footer>

@@ -1,0 +1,28 @@
+---
+import Sidenav from './Sidenav.astro';
+import type { Props as SidenavProps } from './Sidenav.astro';
+import Sidebar from './Sidebar.astro';
+import type { Props as SidebarProps } from './Sidebar.astro';
+import Footer from './Footer.astro';
+import type { Props as FooterProps } from './Footer.astro';
+
+export interface Props {
+    sidenav: SidenavProps;
+    sidebar: SidebarProps;
+    footer: FooterProps;
+}
+
+const { 
+    sidenav,
+    sidebar,
+    footer,
+} = Astro.props;
+---
+<main class="flex mx-auto max-w-6xl lg:mt-[20vh] bg-background">
+    <Sidenav {...sidenav}/>
+    <div class="grow lg:z-10">
+        <slot/>
+        <Footer {...footer}/>
+    </div>
+    <Sidebar {...sidebar}/>
+</main>

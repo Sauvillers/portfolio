@@ -1,0 +1,26 @@
+---
+import Section from './Section.astro';
+
+interface Props {
+	id: string;
+    header?: {
+        icon?: string;
+        title: string;
+    };
+    paragraphs: string[];
+    footer?: {
+        icon?: string;
+        iconClass?: string;
+    };
+}
+
+const { 
+    id,
+    header,
+    paragraphs,
+    footer,
+} = Astro.props;
+---
+<Section {id} {header} {footer}>
+    { paragraphs && paragraphs.map(paragraph => <p class="pb-4" data-animation="fade-up" set:html={paragraph}/> ) }
+</Section>

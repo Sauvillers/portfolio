@@ -1,0 +1,39 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+	id: string;
+    header?: {
+        icon?: string,
+        title: string,
+    };
+    footer?: {
+        icon?: string;
+        iconClass?: string;
+    };
+}
+
+const { 
+    id,
+    header,
+    footer,
+} = Astro.props;
+---
+<section {id} class="mb-20 bg-background">
+    {
+        header && 
+        <div class="section-header flex gap-3 items-center bg-background px-6 lg:px-12 h-16 lg:h-20 border-b border-transparent transition-all py-4 z-20">
+            { header.icon && <Icon class="w-8 h-8 text-primary" name={header.icon} data-animation="fade-up" /> }
+            <h2 class="text-2xl font-medium" data-animation="fade-up" set:html={header.title} /> 
+        </div>    
+    }
+    <div class="px-6 lg:px-12 mt-4">
+        <slot/>
+    </div>
+    {
+        footer &&
+        <div class="mt-20 text-primary max-w-xl mx-auto px-6 lg:px-12" data-animation="fade-up">
+            { footer.icon && <Icon name={footer.icon} class:list={['w-full h-full', footer.iconClass ]} /> }
+        </div>
+    }  
+</section>

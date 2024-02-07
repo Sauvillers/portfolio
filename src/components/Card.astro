@@ -1,0 +1,28 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+	id?: string;
+    header?: {
+        icon?: string,
+        title: string,
+    };
+    padding?: number;
+}
+
+const { 
+    id,
+    header,
+    padding = 6,
+} = Astro.props;
+---
+<div {id} class:list={['flex flex-col border border-outline-variant rounded-lg', padding ? `p-${padding}` : '' ]} data-animation="fade-up">
+    {
+        header && 
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-medium" data-animation="fade-up" set:html={header.title} />   
+                { header.icon && <Icon class="w-6 h-6 text-secondary" name={header.icon} data-animation="fade-up" /> } 
+            </div>    
+    }
+    <slot/>
+</div>

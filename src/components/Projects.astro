@@ -1,0 +1,83 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image, type LocalImageProps, type RemoteImageProps } from 'astro:assets';
+
+import Card from './Card.astro';
+import Section from './Section.astro';
+
+interface Props {
+	id: string;
+    header?: {
+        icon?: string;
+        title: string;
+    },
+    items:  {
+      header: {
+        icon?: string;
+        title: string;
+      },
+      paragraphs: string[];
+      image: LocalImageProps | RemoteImageProps,
+      skills: {
+        label: string;
+        icon: string;
+      }[],
+      links?: {
+        page?: string;
+        sourceCode?: string;
+      }
+    }[],
+    footer?: {
+        icon?: string;
+        iconClass?: string;
+    }
+}
+
+const { 
+    id,
+    header,
+    items,
+    footer,
+} = Astro.props;
+---
+<Section {id} {header} {footer}>
+    <div class="space-y-6">
+        {
+            items.map(item => 
+                <Card padding={0}>
+                    <div class="flex flex-col">
+                        <div class="max-h-[412px] overflow-hidden rounded-lg">
+                            {
+                                // @ts-ignore
+                                <Image {...item.image} />
+                            }      
+                        </div>
+                        <div class="flex flex-col p-6 gap-4">
+                            <h3 class="text-xl font-medium" data-animation="fade-up" set:html={item.header.title} />   
+                            { item.paragraphs.map(paragraph => <p data-animation="fade-up" set:html={paragraph}/>) }
+                            <div class="flex items-center justify-between">
+                                <div class="flex flex-wrap gap-2">
+                                    { item.skills.map(skill => <Icon class="w-8 h-8" name={skill.icon} aria-label={skill.label} title={skill.label} data-animation="fade-up" /> ) }  
+                                </div>
+                                <div>
+                                    {
+                                        item.links?.sourceCode &&
+                                        <a class="btn" aria-label="Link to source code" href={item.links.sourceCode} target="_blank">
+                                            <Icon name="mdi:github"/>
+                                        </a>
+                                    }
+                                    {
+                                        item.links?.page &&
+                                        <a class="btn" aria-label="Link to page" href={item.links.page} target="_blank">
+                                            <Icon name="material-symbols:open-in-new"/>
+                                        </a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Card>
+            )
+        }
+    </div>
+</Section>

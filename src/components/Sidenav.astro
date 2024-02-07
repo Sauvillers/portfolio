@@ -1,0 +1,29 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  navItems: {
+    label: string;
+    icon: string;
+    activeIcon: string;
+    link: string;
+  }[];
+}
+
+const { 
+  navItems,
+} = Astro.props;
+---
+<div class="sidenav hidden lg:block ml-4">
+  <nav class="sidenav-list sticky top-24">
+    {
+      navItems.map(item =>
+        <a class="sidenav-list-item" data-animation="fade-up" href={item.link}>
+          <Icon name={item.icon} />
+          <Icon name={item.activeIcon} data-active-icon/>
+          { item.label }
+        </a>
+      )
+    }
+  </nav>
+</div>

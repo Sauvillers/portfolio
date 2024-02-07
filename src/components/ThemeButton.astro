@@ -1,0 +1,38 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+<button class="btn group" type="button" data-theme-button aria-label="Toggle between System, Light and Dark Theme" data-animation="fade-up">
+  <Icon name="material-symbols:routine-outline" class="visible group-hover:invisible"/>
+  <Icon name="material-symbols:routine" class="invisible group-hover:visible"/>
+  <Icon name="material-symbols:light-mode-outline" class="visible group-hover:invisible"/>
+  <Icon name="material-symbols:light-mode" class="invisible group-hover:visible"/>
+  <Icon name="material-symbols:dark-mode-outline" class="visible group-hover:invisible"/>
+  <Icon name="material-symbols:dark-mode" class="invisible group-hover:visible"/>
+</button>
+
+<script>
+    import * as theming from '../utils/theming';
+
+    const button = document.querySelector('[data-theme-button]');
+
+    setActiveIcon(theming.getCurrentTheme());
+    
+    button?.addEventListener('click', () => {
+      const theme = theming.switchToNextTheme();
+      setActiveIcon(theme);
+    });
+
+    function setActiveIcon(theme: theming.Theme) {
+      const icons = button?.querySelectorAll('[data-icon]');
+      icons?.forEach(icon => {
+        const iconName = icon.getAttribute('data-icon');  
+        if ((iconName?.includes('routine') && theme === theming.Theme.System) ||
+            (iconName?.includes('light') && theme === theming.Theme.Light) ||
+            (iconName?.includes('dark') && theme === theming.Theme.Dark)) {
+          icon.classList.add('active');
+          return;
+        }
+        icon.classList.remove('active');
+      });
+    }
+</script>

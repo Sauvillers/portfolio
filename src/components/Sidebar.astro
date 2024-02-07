@@ -1,0 +1,29 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+    socials: {
+        label: string;
+        icon: string;
+        activeIcon?: string;
+        link: string;
+    }[];
+}
+
+const { 
+    socials,
+} = Astro.props;
+---
+<div class="min-w-20 hidden lg:block">
+    <div class="fixed bottom-0 flex flex-col items-center px-4" data-animation="fade-up">
+        {
+            socials.map(social => 
+                <a class={`btn group`} href={social.link} aria-label={social.label} target="_blank">
+                    <Icon name={social.icon} class={social.activeIcon ? 'block group-hover:hidden' : ''}/>
+                    { social.activeIcon && <Icon name={social.activeIcon} class="hidden group-hover:block"/> }
+                </a>
+            )
+        }
+        <div class="h-16 inline-block border-l-2 border-outline-variant mt-2"></div>
+    </div>
+</div>

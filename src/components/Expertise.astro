@@ -1,0 +1,52 @@
+---
+import { Icon } from 'astro-icon/components';
+import Card from './Card.astro';
+import Section from './Section.astro';
+
+interface Props {
+	id: string;
+  header?: {
+      icon?: string;
+      title: string;
+  };
+  items:  {
+    header: {
+      icon?: string;
+      title: string;
+    };
+    paragraphs: string[];
+    skills: {
+      label: string;
+      icon: string;
+    }[];
+  }[];
+  footer?: {
+    icon?: string;
+    iconClass?: string;
+  }
+}
+
+const { 
+  id,
+  header,
+  items,
+  footer,
+} = Astro.props;
+---
+
+<Section {id} {header} {footer}>
+  <div class="grid lg:grid-cols-2 gap-6">
+      {
+          items.map(item => 
+              <Card header={item.header}>
+                  { item.paragraphs.map(paragraph => <p class="grow" data-animation="fade-up" set:html={paragraph}/>) }
+                  { item.skills && 
+                    <div class="flex flex-wrap gap-2 mt-4">
+                      { item.skills.map(skill => <Icon class="w-8 h-8" name={skill.icon} aria-label={skill.label} title={skill.label} data-animation="fade-up" /> ) }  
+                    </div> 
+                  }
+              </Card>
+          )
+      }
+  </div>
+</Section>

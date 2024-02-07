@@ -1,0 +1,24 @@
+---
+import { NOT_FOUND } from '../config';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import { Icon } from 'astro-icon/components';
+---
+<Layout {...NOT_FOUND.layout}>
+    <Section id={NOT_FOUND.id} footer={NOT_FOUND.footer}>
+        <h1 class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter font-heading mb-1" data-animation="fade-up" set:html={NOT_FOUND.title}/>
+        { NOT_FOUND.subtitle && <h2 class="text-2xl font-medium mb-4" data-animation="fade-up" set:html={NOT_FOUND.subtitle} /> }
+        <p class="text-xl flex items-center gap-2" data-animation="fade-up"><Icon class="hidden lg:block w-8 h-8" name={NOT_FOUND.arrowLeftIcon} /><Icon class="block lg:hidden w-8 h-8" name={NOT_FOUND.arrowBottomIcon} /> {NOT_FOUND.navTitle}</p>
+        <nav class="flex flex-col gap-2 lg:hidden mt-6">
+          {
+            NOT_FOUND.navItems.map(item =>
+              <a class="btn secondary first:primary last:tertiary filled group max-w-96" data-animation="fade-up" href={item.link}>
+                <Icon name={item.icon} class="block group-hover:hidden"/>
+                <Icon name={item.activeIcon} class="hidden group-hover:block"/>
+                { item.label }
+              </a>
+            )
+          }
+        </nav>
+    </Section>
+</Layout>

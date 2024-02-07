@@ -1,0 +1,19 @@
+---
+import { INDEX } from '../config.ts';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Expertise from '../components/Expertise.astro';
+import Technologies from '../components/Technologies.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+---
+
+<Layout {...INDEX.layout}>
+	<Hero {...INDEX.hero}/>
+	<About {...INDEX.about}/>
+	<Expertise {...INDEX.expertise}/>
+	<Technologies {...INDEX.technologies}/>
+	<Projects {...INDEX.projects}/>
+	<Contact {...INDEX.contact}/>
+</Layout>

@@ -1,0 +1,36 @@
+---
+import Header from '../components/Header.astro';
+import type { Props as HeaderProps } from '../components/Header.astro';
+import Navigation from '../components/Navigation.astro';
+import type { Props as NavigationProps } from '../components/Navigation.astro';
+import BaseHead from '../components/BaseHead.astro';
+import type { Props as HeadProps } from '../components/BaseHead.astro';
+import BaseScripts from '../components/BaseScripts.astro';
+
+interface Props extends NavigationProps {
+	head: HeadProps,
+	header: HeaderProps;
+}
+
+const { 
+	head, 
+	header,
+	sidenav,
+	sidebar,
+	footer,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<BaseHead {...head}/>
+	</head>
+	<body class="bg-background text-on-background">
+		<Header {...header}/>
+		<Navigation {sidenav} {sidebar} {footer}>
+			<slot />
+		</Navigation>
+	</body>
+</html>
+<BaseScripts/>

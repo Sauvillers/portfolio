@@ -1,0 +1,30 @@
+---
+import Section from './Section.astro';
+
+interface Props {
+	id: string;
+  highlight?: string;
+  title: string;
+  subtitle?: string;
+  paragraphs?: string[];
+  footer?: {
+    icon?: string;
+    iconClass?: string;
+  };
+}
+
+const { 
+  id,
+  highlight,
+  title,
+  subtitle,
+  paragraphs,
+  footer,
+} = Astro.props;
+---
+<Section {id} {footer}>
+  { highlight && <h2 class="text-2xl tracking-wide" data-animation="fade-up" set:html={highlight} /> }
+  <h1 class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter font-heading mb-1" data-animation="fade-up" set:html={title}/>
+  { subtitle && <h2 class="text-2xl font-medium mb-4" data-animation="fade-up" set:html={subtitle} /> }
+  { paragraphs && paragraphs.map(paragraph => <p class="text-xl" data-animation="fade-up" set:html={paragraph}/> ) }
+</Section>

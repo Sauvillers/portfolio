@@ -1,0 +1,55 @@
+---
+import { Icon } from 'astro-icon/components';
+import Section from './Section.astro';
+import Card from './Card.astro';
+
+interface Props {
+	id: string;
+    header?: {
+        icon?: string;
+        title: string;
+    };
+    items:  {
+      header: {
+        icon?: string;
+        title: string;
+      };
+      skills: {
+        label: string;
+        icon: string;
+        url?: string;
+      }[];
+    }[];
+    footer?: {
+        icon?: string;
+        iconClass?: string;
+    };
+}
+
+const { 
+    id,
+    header,
+    items,
+    footer,
+} = Astro.props;
+---
+<Section {id} {header} {footer}>
+    <div class="space-y-6">
+        {
+            items.map(item => 
+                <Card header={item.header}>
+                    <div class="grid w-full" style="grid-template-columns: repeat(auto-fill, minmax(96px, 1fr))">
+                        {
+                            item.skills.map(skill => 
+                                <a class="btn flex-col" href={skill.url} target="_blank" data-animation="fade-up">
+                                    { skill.icon && <Icon name={skill.icon}/> }
+                                    { skill.label }
+                                </a> 
+                            ) 
+                        }
+                    </div>
+                </Card>
+            )
+        }
+    </div>
+</Section>

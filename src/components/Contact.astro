@@ -1,0 +1,45 @@
+---
+import { Icon } from 'astro-icon/components';
+import Section from './Section.astro';
+
+interface Props {
+	id: string;
+    header?: {
+        icon?: string;
+        title: string;
+    };
+    socials: {
+        label: string;
+        description: string;
+        icon: string;
+        activeIcon?: string;
+        link: string;
+        color?: string;
+    }[];
+    footer?: {
+        icon?: string;
+        iconClass?: string;
+    };
+}
+
+const { 
+    id,
+    header,
+    socials,
+    footer,
+} = Astro.props;
+---
+<Section {id} {header} {footer}>
+    <div class="flex flex-col items-start">
+        {
+            socials.map(social => 
+                <a class:list={['btn group text-lg px-6 py-4', social.color]} href={social.link} aria-label={social.label} target="_blank" data-animation="fade-up">
+                    <Icon name={social.icon} class={social.activeIcon ? 'block group-hover:hidden' : ''}/>
+                    { social.activeIcon && <Icon name={social.activeIcon} class="hidden group-hover:block"/> }
+                    <span class="inline md:hidden">{ social.label }</span>
+                    <span class="hidden md:inline">{ social.description }</span>
+                </a>
+            )
+        }
+    </div>
+</Section>
