@@ -289,9 +289,10 @@ const projects = {
             },
             paragraphs: [
                 'I have built this portfolio website completely from scratch during my free time.',
-                'It is built using <a class="link" href="https://astro.build/" target="_blank">Astro</a> as web framework, it is a great fit for a static website like this. I have also used <a class="link" href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a> for easy styling, and <a class="link" href="https://motion.dev/" target="_blank">Motion One</a> for easy animations.',
+                'It is built with <a class="link" href="https://astro.build/" target="_blank">Astro</a> (web framework), it is a great fit for a static website like this. I have also used <a class="link" href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a> for easy styling, and <a class="link" href="https://motion.dev/" target="_blank">Motion One</a> for easy animations.',
                 'Automatically built and published to <a class="link" href="https://pages.github.com/" target="_blank">GitHub Pages</a> with a <a class="link" href="https://github.com/features/actions" target="_blank">GitHub Actions</a> workflow.',
-                'The source code is available on <a class="link" href="https://github.com/Loewie/portfolio" target="_blank">GitHub</a>, any aspiring developer can use it as a reference or template for their portfolio / personal website <b>with attribution</b>.'
+                'The source code is available on <a class="link" href="https://github.com/Loewie/portfolio" target="_blank">GitHub</a>, any aspiring developer can use it as a reference or template for their portfolio / personal website <b>with attribution</b>.  I have made the content of the website easy configurable through a config file, as well as the website theme and colors.',
+                'More features will be added over time.',
             ],
             image: {
                 src: portfolioLightImage,
