@@ -23,8 +23,8 @@ const {
 } = Astro.props;
 ---
 <Section {id} {footer}>
-  { highlight && <h2 class="text-2xl tracking-wide" data-animation="fade-up" set:html={highlight} /> }
-  <h1 class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter font-heading mb-1" data-animation="fade-up" set:html={title}/>
-  { subtitle && <h2 class="text-2xl font-medium mb-4" data-animation="fade-up" set:html={subtitle} /> }
-  { paragraphs && paragraphs.map(paragraph => <p class="text-xl" data-animation="fade-up" set:html={paragraph}/> ) }
+  { highlight && <h2 class="text-2xl tracking-wide" data-animate set:html={highlight} /> }
+  <h1 class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter font-heading mb-1" data-animate set:html={title}/>
+  { subtitle && <h2 class="text-2xl font-medium mb-4" data-animate set:html={subtitle} /> }
+  { paragraphs && paragraphs.map(paragraph => <p class="text-xl" data-animate set:html={paragraph}/> ) }
 </Section>

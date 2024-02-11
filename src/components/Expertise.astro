@@ -39,10 +39,10 @@ const {
       {
           items.map(item => 
               <Card header={item.header}>
-                  { item.paragraphs.map(paragraph => <p class="grow" data-animation="fade-up" set:html={paragraph}/>) }
+                  { item.paragraphs.map(paragraph => <p class="grow" data-animate set:html={paragraph}/>) }
                   { item.skills && 
                     <div class="flex flex-wrap gap-2 mt-4">
-                      { item.skills.map(skill => <Icon class="w-8 h-8" name={skill.icon} aria-label={skill.label} title={skill.label} data-animation="fade-up" /> ) }  
+                      { item.skills.map(skill => <Icon class="w-8 h-8" name={skill.icon} aria-label={skill.label} title={skill.label} data-animate/> ) }  
                     </div> 
                   }
               </Card>

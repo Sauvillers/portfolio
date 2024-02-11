@@ -33,7 +33,7 @@ const {
     <div class="flex flex-col items-start">
         {
             socials.map(social => 
-                <a class:list={['btn group text-lg px-6 py-4', social.color]} href={social.link} aria-label={social.label} target="_blank" data-animation="fade-up">
+                <a class:list={['btn group text-lg px-6 py-4', social.color]} href={social.link} aria-label={social.label} target="_blank" data-animate>
                     <Icon name={social.icon} class={social.activeIcon ? 'block group-hover:hidden' : ''}/>
                     { social.activeIcon && <Icon name={social.activeIcon} class="hidden group-hover:block"/> }
                     <span class="inline md:hidden">{ social.label }</span>

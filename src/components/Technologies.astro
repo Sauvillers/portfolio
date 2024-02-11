@@ -41,7 +41,7 @@ const {
                     <div class="grid w-full" style="grid-template-columns: repeat(auto-fill, minmax(96px, 1fr))">
                         {
                             item.skills.map(skill => 
-                                <a class="btn flex-col" href={skill.url} target="_blank" data-animation="fade-up">
+                                <a class="btn flex-col min-h-28" href={skill.url} target="_blank" data-animate>
                                     { skill.icon && <Icon name={skill.icon}/> }
                                     { skill.label }
                                 </a> 
