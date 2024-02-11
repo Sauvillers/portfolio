@@ -8,5 +8,5 @@ const {
 } = Astro.props;
 ---
 <footer class="px-12 py-6">
-    { paragraphs.map(paragraph => <p data-animation="fade-up" set:html={paragraph}/> ) }
+    { paragraphs.map(paragraph => <p data-animate set:html={paragraph}/> ) }
 </footer>

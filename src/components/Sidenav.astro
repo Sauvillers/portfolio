@@ -18,7 +18,7 @@ const {
   <nav class="sidenav-list sticky top-24">
     {
       navItems.map(item =>
-        <a class="sidenav-list-item" data-animation="fade-up" href={item.link}>
+        <a class="sidenav-list-item" data-animate href={item.link}>
           <Icon name={item.icon} />
           <Icon name={item.activeIcon} data-active-icon/>
           { item.label }

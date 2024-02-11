@@ -18,6 +18,7 @@ interface Props {
       },
       paragraphs: string[];
       image: LocalImageProps | RemoteImageProps,
+      darkImage?: LocalImageProps | RemoteImageProps,
       skills: {
         label: string;
         icon: string;
@@ -46,29 +47,38 @@ const {
             items.map(item => 
                 <Card padding={0}>
                     <div class="flex flex-col">
-                        <div class="max-h-[412px] overflow-hidden rounded-lg">
+                        <div class:list={[ 'max-h-[412px] overflow-hidden rounded-lg', item.darkImage ? 'block dark:hidden' : '' ]} data-animate>
                             {
                                 // @ts-ignore
                                 <Image {...item.image} />
                             }      
                         </div>
+                        {
+                            item.darkImage &&
+                            <div class="max-h-[412px] overflow-hidden rounded-lg hidden dark:block" data-animate>
+                                {
+                                    // @ts-ignore
+                                    <Image {...item.darkImage} />
+                                }      
+                            </div>
+                        }
                         <div class="flex flex-col p-6 gap-4">
-                            <h3 class="text-xl font-medium" data-animation="fade-up" set:html={item.header.title} />   
-                            { item.paragraphs.map(paragraph => <p data-animation="fade-up" set:html={paragraph}/>) }
+                            <h3 class="text-xl font-medium" data-animate set:html={item.header.title} />   
+                            { item.paragraphs.map(paragraph => <p data-animate set:html={paragraph}/>) }
                             <div class="flex items-center justify-between">
                                 <div class="flex flex-wrap gap-2">
-                                    { item.skills.map(skill => <Icon class="w-8 h-8" name={skill.icon} aria-label={skill.label} title={skill.label} data-animation="fade-up" /> ) }  
+                                    { item.skills.map(skill => <Icon class="w-8 h-8" name={skill.icon} aria-label={skill.label} title={skill.label} data-animate/> ) }  
                                 </div>
                                 <div>
                                     {
                                         item.links?.sourceCode &&
-                                        <a class="btn" aria-label="Link to source code" href={item.links.sourceCode} target="_blank">
+                                        <a class="btn" aria-label="Link to source code" href={item.links.sourceCode} target="_blank" data-animate>
                                             <Icon name="mdi:github"/>
                                         </a>
                                     }
                                     {
                                         item.links?.page &&
-                                        <a class="btn" aria-label="Link to page" href={item.links.page} target="_blank">
+                                        <a class="btn" aria-label="Link to page" href={item.links.page} target="_blank" data-animate>
                                             <Icon name="material-symbols:open-in-new"/>
                                         </a>
                                     }

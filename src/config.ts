@@ -1,5 +1,7 @@
 import fieldServiceImage from './assets/images/WilmsFieldService.png';
 import customerPortalImage from './assets/images/WilmsCustomerPortal.jpg';
+import portfolioLightImage from './assets/images/PortfolioLight.jpg';
+import portfolioDarkImage from './assets/images/PortfolioDark.jpg';
 
 const name = 'Laurens Sauvillers';
 
@@ -10,6 +12,19 @@ const yearCareerStarted = 2016;
 
 const yearsOfInterest = currentYear - yearInterestStarted - ((currentYear - yearInterestStarted) % 5);
 const yearsOfExperience = currentYear - yearCareerStarted;
+
+export const ANIMATIONS = {
+    attributeName: 'data-animate',
+    duration: 0.5,
+    stagger: 0.1,
+    easing: 'ease',
+    transformFrom: 'translateY(50px)',
+    transformTo: 'translateY(0)',
+}
+
+export const SITE = 'https://sauvillers.dev';
+
+export const DEFAULT_THEME = 'system';
 
 const head = {
     title: name,
@@ -270,6 +285,42 @@ const projects = {
         },
         {
             header: {
+                title: 'Portfolio',
+            },
+            paragraphs: [
+                'I have built this portfolio website completely from scratch during my free time.',
+                'It is built using <a class="link" href="https://astro.build/" target="_blank">Astro</a> as web framework, it is a great fit for a static website like this. I have also used <a class="link" href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a> for easy styling, and <a class="link" href="https://motion.dev/" target="_blank">Motion One</a> for easy animations.',
+                'Automatically built and published to <a class="link" href="https://pages.github.com/" target="_blank">GitHub Pages</a> with a <a class="link" href="https://github.com/features/actions" target="_blank">GitHub Actions</a> workflow.',
+                'The source code is available on <a class="link" href="https://github.com/Loewie/portfolio" target="_blank">GitHub</a>, any aspiring developer can use it as a reference or template for their portfolio / personal website <b>with attribution</b>.'
+            ],
+            image: {
+                src: portfolioLightImage,
+                alt: 'Portfolio',
+                aspectRatio: '16:9',
+                width: 768,
+                widths: [400, 768],
+                sizes: '(max-width: 768px) 100vw, 432px',
+            },
+            darkImage: {
+                src: portfolioDarkImage,
+                alt: 'Portfolio',
+                aspectRatio: '16:9',
+                width: 768,
+                widths: [400, 768],
+                sizes: '(max-width: 768px) 100vw, 432px',
+            },
+            skills: [
+                { label: 'Astro', icon: 'astro' },
+                { label: 'Tailwind CSS', icon: 'logos:tailwindcss-icon' },
+                { label: 'TypeScript', icon: 'logos:typescript-icon' },
+            ],
+            links: {
+                page: SITE,
+                sourceCode: 'https://github.com/Loewie/portfolio',
+            },
+        },
+        {
+            header: {
                 title: 'Valheim UI mod',
             },
             paragraphs: [
@@ -316,7 +367,7 @@ const contact = {
 
 const footer = {
     paragraphs: [
-        'Created by Laurens Sauvillers. Built with <a class="link" href="https://astro.build/" target="_blank">Astro 🚀</a> and <a class="link" href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a>, illustrations by <a class="link" href="https://undraw.co/" target="_blank">unDraw</a>, icons by <a class="link" href="https://fonts.google.com/icons" target="_blank">Google</a>. Source code is available on <a class="link" href="https://github.com/Loewie/Portfolio" target="_blank">GitHub</a>, give it a star if you like it!',
+        'Created by Laurens Sauvillers. Built with <a class="link" href="https://astro.build/" target="_blank">Astro 🚀</a>, <a class="link" href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a> (for easy styling), and <a class="link" href="https://motion.dev/" target="_blank">Motion One</a> (for easy animations). Illustrations by <a class="link" href="https://undraw.co/" target="_blank">unDraw</a>, and icons by <a class="link" href="https://fonts.google.com/icons" target="_blank">Google</a>. The font is Inter by <a class="link" href="https://rsms.me/inter/" target="_blank">Rasmus</a>. Source code is available on <a class="link" href="https://github.com/Loewie/portfolio" target="_blank">GitHub</a>, give it a star if you like it!',
     ],
 }
 
@@ -334,9 +385,6 @@ const layout = {
     },
     footer,
 };
-
-
-export const SITE = 'https://sauvillers.dev';
 
 export const INDEX = {
     layout,

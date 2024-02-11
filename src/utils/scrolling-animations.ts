@@ -1,4 +1,6 @@
-const ANIMATION_ATTRIBUTE_NAME = 'data-animation';
+import { animate, inView, stagger, type Easing } from 'motion';
+
+import { ANIMATIONS } from '../config';
 
 export class ScrollingAnimations {
 	private animationElements: Element[] = [];
@@ -9,23 +11,43 @@ export class ScrollingAnimations {
 	private activeSidenavItem?: HTMLAnchorElement;
 	private scrollY = 0;
 	private height = 0;
+	private sectionsInView: Element[] = [];
 
 	constructor() {
 		window.onload = () => this.init();
 	}
 
 	private init(): void {
-		this.animationElements = Array.from(document.querySelectorAll(`[${ANIMATION_ATTRIBUTE_NAME}]`));
+		this.animationElements = Array.from(document.querySelectorAll(`[${ANIMATIONS.attributeName}]`));
 		this.sivenavItems = Array.from(document.querySelectorAll('.sidenav-list-item'));
   		this.header = document.querySelector('header');
   		this.sections = Array.from(document.querySelectorAll('section'));
 
-		this.animationElements.forEach(element => element.classList.add('opacity-0'));
+		animate(this.animationElements, { opacity: 0, transform: ANIMATIONS.transformFrom }, { duration: 0 });
 
 		window.addEventListener('scroll', () => this.refresh());
 		window.addEventListener('resize', () => this.refresh());
 
 		this.refresh();
+		
+		animate(`.header [${ANIMATIONS.attributeName}]`, { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger), easing: ANIMATIONS.easing as Easing })
+			.finished.then(() => {
+			
+			inView('section,footer', ({ target }) => {
+				this.sectionsInView.push(target);
+				if (this.scrollY === 0 && target !== this.sections[0]) {
+					return;	
+				}
+
+				animate(target.querySelectorAll(`[${ANIMATIONS.attributeName}]`), { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger), easing: ANIMATIONS.easing as Easing });
+				return () => this.sectionsInView.slice(this.sectionsInView.indexOf(target), 1);
+			});
+
+			inView('.sidenav,.sidebar', ({ target }) => {
+				animate(target.querySelectorAll(`[${ANIMATIONS.attributeName}]`), { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger, { start: target.classList.contains('sidebar') ? 1 : 0 }), easing: ANIMATIONS.easing as Easing });
+				return () => animate(target.querySelectorAll(`[${ANIMATIONS.attributeName}]`), { opacity: 0, transform: ANIMATIONS.transformFrom }, { duration: 0 });
+			});
+		});
 	}
 
 	public refresh(): void {
@@ -36,33 +58,22 @@ export class ScrollingAnimations {
 		this.toggleMenuBackground();
 		this.toggleSectionHeaderBorder();
 		this.applySidenavAnimations();
-		this.applyAnimations();
-	}
-
-	private applyAnimations(): void {
-		let i = 0;
-
-		this.animationElements.filter(e => !e.closest('.invisible')).forEach(element => {
-			const rect = element.getBoundingClientRect();
-			if ((rect.y + rect.height) >= 0 && rect.y < this.height && !element.classList.contains('opacity-100')) {
-				setTimeout(() => element.classList.add('opacity-100', 'animate-fade-up'), i++ * 100);
-			}
-		});
 	}
 
 	private applySidenavAnimations(): void {
 		if (this.scrollY === 0) {
-			this.sections.filter(s => s !== this.sections[0]).forEach(section => {
-				section.classList.add('invisible');
-				this.animationElements.filter(e => e.closest('#' + section.id)).forEach(element => {
-					element.classList.remove('opacity-100', 'animate-fade-up');
-				});
-			});
+			this.sections.filter(s => s !== this.sections[0]).forEach(section => section.classList.add('invisible'));
 			this.sivenavItems.forEach(item => item.classList.add('collapsed', 'duration-500'));
+			animate(`section:not(:first-child) [${ANIMATIONS.attributeName}]`, { opacity: 0, transform: ANIMATIONS.transformFrom }, { duration: 0 });
 			return;
 		}
 		
-		this.sections.filter(s => s.id !== 'hero').forEach(section => section.classList.remove('invisible'));
+		this.sections.filter(s => s.id !== 'hero' && s.classList.contains('invisible')).forEach(section => {
+			section.classList.remove('invisible');
+			if (this.sectionsInView.includes(section)) {
+				animate(section.querySelectorAll(`[${ANIMATIONS.attributeName}]`), { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger), easing: ANIMATIONS.easing as Easing });
+			}
+		});
 		this.sivenavItems.forEach(item => item.classList.remove('collapsed'));
 	}
 	

@@ -22,5 +22,5 @@ const {
 } = Astro.props;
 ---
 <Section {id} {header} {footer}>
-    { paragraphs && paragraphs.map(paragraph => <p class="pb-4" data-animation="fade-up" set:html={paragraph}/> ) }
+    { paragraphs && paragraphs.map(paragraph => <p class="pb-4" data-animate set:html={paragraph}/> ) }
 </Section>

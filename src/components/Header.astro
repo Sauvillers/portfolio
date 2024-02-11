@@ -21,13 +21,13 @@ const {
     socials,
 } = Astro.props;
 ---
-<header class="flex flex-col sticky top-0 mx-auto max-w-6xl bg-background z-40 lg:z-0 py-3 lg:py-4 px-4 transition-all">
-    <div class="flex justify-between items-center lg:items-start">
+<header class="header-container flex flex-col sticky top-0 mx-auto max-w-6xl bg-background z-40 lg:z-0 py-3 lg:py-4 px-4 transition-all">
+    <div class="header flex justify-between items-center lg:items-start">
         <div class="absolute left-0 top-0 w-[63px] h-[63px] block lg:hidden bg-background z-0"></div>
         <Logo />
         <div class="flex">
             <ThemeButton/>
-            <button class="btn lg:hidden" type="button" data-menu-button aria-label="Toggle Menu" data-animation="fade-up">
+            <button class="btn lg:hidden" type="button" data-menu-button aria-label="Toggle Menu" data-animate>
                 <Icon name="material-symbols:menu"/>
             </button>
         </div>
@@ -36,16 +36,16 @@ const {
         <nav class="flex flex-col mx-auto">
             {
                 navItems.map(item => 
-                    <a class="btn px-6 py-4 text-lg" href={item.link} data-animation="fade-up">
+                    <a class="btn px-6 py-4 text-lg" href={item.link} data-animate>
                         { item.label }
                     </a>
                 )
             }
         </nav>
-        <div class="socials p-4 mx-auto" data-animation="fade-up">
+        <div class="socials p-4 mx-auto">
             {
                 socials.map(social => 
-                    <a class={`btn group`} href={social.link} aria-label={social.label} target="_blank">
+                    <a class={`btn group`} href={social.link} aria-label={social.label} target="_blank" data-animate>
                         <Icon name={social.icon} class={social.activeIcon ? 'block group-hover:hidden' : ''}/>
                         { social.activeIcon && <Icon name={social.activeIcon} class="hidden group-hover:block"/> }
                     </a>
@@ -55,12 +55,17 @@ const {
     </div>
 </header>
 <script>
+    import { animate, stagger, type AnimationControls, type Easing } from 'motion';
+    import { ANIMATIONS } from '../config'; 
+
     const body = document.querySelector('body');
     const header = document.querySelector('header');
     const menu = document.querySelector('header .menu');
     const navItems = document.querySelectorAll('header nav a');
     const button = document.querySelector('[data-menu-button]');
     let menuExpanded = false;
+    const animationElements = menu?.querySelectorAll(`[${ANIMATIONS.attributeName}]`) ?? [];
+    let animationControls: AnimationControls;
 
     button?.addEventListener('click', () => toggleMenu());
 
@@ -75,16 +80,21 @@ const {
 
     const toggleMenu = () => {
         menuExpanded = !menuExpanded;
+        
         header?.classList.toggle('h-screen');
         header?.classList.toggle('expanded');
         menu?.classList.toggle('flex');
         menu?.classList.toggle('hidden');
         body?.classList.toggle('overflow-hidden');
-        //toggleDivider();
+
         if (menuExpanded) {
             header?.classList.add('bg-background');
-        } else {
-            header?.classList.remove('bg-background');
+            animationControls = animate(animationElements, { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger), easing: ANIMATIONS.easing as Easing });
+            return;
         }
+
+        header?.classList.remove('bg-background');
+        animationControls.stop();  
+        animate(animationElements, { opacity: 0, transform: ANIMATIONS.transformFrom }, { duration: 0 });
     }
 </script>

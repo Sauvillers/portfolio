@@ -14,8 +14,8 @@ const {
     socials,
 } = Astro.props;
 ---
-<div class="min-w-20 hidden lg:block">
-    <div class="fixed bottom-0 flex flex-col items-center px-4" data-animation="fade-up">
+<div class="sidebar min-w-20 hidden lg:block">
+    <div class="fixed bottom-0 flex flex-col items-center px-4" data-animate>
         {
             socials.map(social => 
                 <a class={`btn group`} href={social.link} aria-label={social.label} target="_blank">

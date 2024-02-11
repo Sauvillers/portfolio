@@ -1,10 +1,10 @@
+import { DEFAULT_THEME } from '../config';
+
 export enum Theme {
     System = 'system',
     Light = 'light',
     Dark = 'dark',
 }
-
-const DEFAULT_THEME = Theme.System;
 
 export const isSystemThemeDark = (): boolean => {
     return window.matchMedia('(prefers-color-scheme: dark)').matches;

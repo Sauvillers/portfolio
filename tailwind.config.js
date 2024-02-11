@@ -188,23 +188,9 @@ export default {
         sans: ['var(--ls-sys-font-family-sans)', ...defaultTheme.fontFamily.sans],
         serif: ['var(--ls-sys-font-family-serif)', ...defaultTheme.fontFamily.serif],
       },
-      keyframes: {
-        'fade-up': {
-          from: { 
-            transform: 'translateY(50px)',
-            opacity: 0,
-          },
-          to: { 
-            transform: 'translateY(0)',
-            opacity: 1,
-          },
-        }
-      },
-      animation: {
-        'fade-up': 'fade-up 700ms ease',
-      }
     },
   },
   plugins: [],
+  darkMode: 'class',
 }
 
