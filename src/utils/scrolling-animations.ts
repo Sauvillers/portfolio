@@ -64,7 +64,9 @@ export class ScrollingAnimations {
 		if (this.scrollY === 0) {
 			this.sections.filter(s => s !== this.sections[0]).forEach(section => section.classList.add('invisible'));
 			this.sivenavItems.forEach(item => item.classList.add('collapsed', 'duration-500'));
-			animate(`section:not(:first-child) [${ANIMATIONS.attributeName}]`, { opacity: 0, transform: ANIMATIONS.transformFrom }, { duration: 0 });
+			if (this.sections.length > 1) {
+				animate(`section:not(:first-child) [${ANIMATIONS.attributeName}]`, { opacity: 0, transform: ANIMATIONS.transformFrom }, { duration: 0 });
+			}
 			return;
 		}
 		
@@ -90,11 +92,11 @@ export class ScrollingAnimations {
 
 	private toggleMenuBackground() {
 		const sectionHeader = this.activeSection?.querySelector('.section-header'); 
-		const nextSection = this.sections[this.sections.indexOf(this.activeSection!) + 1];
+		const nextSection = this.sections.length > 1 ? this.sections[this.sections.indexOf(this.activeSection!) + 1] : null;
 		const nextSectionHeader = nextSection?.querySelector('.section-header'); 
 
 		if (!this.header?.classList.contains('expanded') && (sectionHeader || 
-				(!nextSectionHeader || nextSection.getBoundingClientRect().y < nextSectionHeader.getBoundingClientRect().height))) {
+				(nextSection && (!nextSectionHeader || nextSection.getBoundingClientRect().y < nextSectionHeader.getBoundingClientRect().height)))) {
 			this.header?.classList.remove('bg-background');
 			return;
 		}
