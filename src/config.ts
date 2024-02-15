@@ -28,7 +28,7 @@ export const DEFAULT_THEME = 'system';
 
 const head = {
     title: name,
-    description: 'Laurens Sauvillers is a Software Engineer based in Belgium who builds and architects scalable enterprise applications consistent with industry standards using .NET, Angular, and other technologies. He thrives on turning ideas into seamless, functional realities.',
+    description: 'Laurens Sauvillers is a Software Engineer based in Belgium who builds and architects scalable enterprise applications consistent with industry standards using .NET, Angular, and other technologies.',
     image: '/BurgEltz.jpg',
     googleAnalyticsId: 'G-KS1EG98KGE',
 }

@@ -14,7 +14,7 @@
   "dependencies": {
     "@astrojs/partytown": "^2.0.4",
     "@astrojs/tailwind": "^5.1.0",
-    "astro": "^4.3.5",
+    "astro": "^4.4.0",
     "astro-icon": "^1.1.0",
     "inter-ui": "^4.0.2",
     "motion": "^10.17.0",
@@ -28,6 +28,6 @@
     "@iconify-json/mdi": "^1.1.64"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.10.0"
+    "@rollup/rollup-linux-x64-gnu": "^4.11.0"
   }
 }
