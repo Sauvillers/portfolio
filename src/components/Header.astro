@@ -32,7 +32,7 @@ const {
             </button>
         </div>
     </div>
-    <div class="menu hidden flex-col grow justify-center">
+    <div class="menu hidden flex-col grow justify-center overflow-auto">
         <nav class="flex flex-col mx-auto">
             {
                 navItems.map(item => 
@@ -66,6 +66,7 @@ const {
     let menuExpanded = false;
     const animationElements = menu?.querySelectorAll(`[${ANIMATIONS.attributeName}]`) ?? [];
     let animationControls: AnimationControls;
+    let hadBackground = false;
 
     button?.addEventListener('click', () => toggleMenu());
 
@@ -88,12 +89,16 @@ const {
         body?.classList.toggle('overflow-hidden');
 
         if (menuExpanded) {
+            hadBackground = header?.classList.contains('bg-background') ?? false;
             header?.classList.add('bg-background');
             animationControls = animate(animationElements, { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger), easing: ANIMATIONS.easing as Easing });
             return;
         }
 
-        header?.classList.remove('bg-background');
+        if (!hadBackground) {
+            header?.classList.remove('bg-background');
+        }
+
         animationControls.stop();  
         animate(animationElements, { opacity: 0, transform: ANIMATIONS.transformFrom }, { duration: 0 });
     }
