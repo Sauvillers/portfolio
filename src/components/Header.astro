@@ -21,9 +21,9 @@ const {
     socials,
 } = Astro.props;
 ---
-<header class="header-container flex flex-col sticky top-0 mx-auto max-w-6xl bg-background z-40 lg:z-0 py-3 lg:py-4 px-4 transition-all">
+<header class="header-container flex flex-col sticky top-0 mx-auto max-w-6xl bg-transparent z-40 lg:z-0 py-3 lg:py-4 px-4 transition-all">
     <div class="header flex justify-between items-center lg:items-start">
-        <div class="absolute left-0 top-0 w-[63px] h-[63px] block lg:hidden bg-background z-0"></div>
+        <div class="logo-background absolute left-0 top-0 w-[63px] h-[63px] block lg:hidden bg-transparent z-0"></div>
         <Logo />
         <div class="flex">
             <ThemeButton/>
@@ -63,10 +63,17 @@ const {
     const menu = document.querySelector('header .menu');
     const navItems = document.querySelectorAll('header nav a');
     const button = document.querySelector('[data-menu-button]');
+    const logoBackground = document.querySelector('.logo-background');
     let menuExpanded = false;
     const animationElements = menu?.querySelectorAll(`[${ANIMATIONS.attributeName}]`) ?? [];
     let animationControls: AnimationControls;
     let hadBackground = false;
+
+    header?.classList.add('bg-background');
+    header?.classList.remove('bg-transparent');
+
+    logoBackground?.classList.add('bg-background');
+    logoBackground?.classList.remove('bg-transparent');
 
     button?.addEventListener('click', () => toggleMenu());
 

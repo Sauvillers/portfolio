@@ -44,7 +44,7 @@ const navItems = [
 
 const socials = [
     { label: 'Email', description: 'contact@sauvillers.dev', icon: 'mdi:email-outline', activeIcon: 'mdi:email', link:'mailto:contact@sauvillers.dev', color: 'primary' },
-    { label: 'GitHub', description: 'GitHub.com/Loewie', icon: 'mdi:github', link:'https://github.com/Loewie', color: 'secondary' },
+    { label: 'GitHub', description: 'GitHub.com/Sauvillers', icon: 'mdi:github', link:'https://github.com/Sauvillers', color: 'secondary' },
     { label: 'LinkedIn', description: 'LinkedIn.com/in/Laurens-Sauvillers', icon: 'mdi:linkedin', link:'https://www.linkedin.com/in/laurens-sauvillers/', color: 'tertiary' },
 ];
 
@@ -317,7 +317,7 @@ const projects = {
             ],
             links: {
                 page: SITE,
-                sourceCode: 'https://github.com/Loewie/portfolio',
+                sourceCode: 'https://github.com/Sauvillers/portfolio',
             },
         },
         {
