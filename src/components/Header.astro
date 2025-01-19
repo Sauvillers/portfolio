@@ -55,7 +55,7 @@ const {
     </div>
 </header>
 <script>
-    import { animate, stagger, type Easing } from 'motion';
+    import { animate, stagger, type AnimationPlaybackControls, type Easing } from 'motion';
     import { ANIMATIONS } from '../config'; 
 
     const body = document.querySelector('body');
@@ -66,7 +66,7 @@ const {
     const logoBackground = document.querySelector('.logo-background');
     let menuExpanded = false;
     const animationElements = menu?.querySelectorAll(`[${ANIMATIONS.attributeName}]`) ?? [];
-    const animationControls = animate(animationElements, { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger), ease: ANIMATIONS.easing as Easing });
+    let animationControls: AnimationPlaybackControls;
     let hadBackground = false;
 
     header?.classList.add('bg-background');
@@ -98,7 +98,7 @@ const {
         if (menuExpanded) {
             hadBackground = header?.classList.contains('bg-background') ?? false;
             header?.classList.add('bg-background');
-            animationControls.play();
+            animationControls = animate(animationElements, { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger), ease: ANIMATIONS.easing as Easing });
             return;
         }
 
