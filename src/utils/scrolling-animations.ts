@@ -30,24 +30,22 @@ export class ScrollingAnimations {
 
 		this.refresh();
 		
-		animate(`.header [${ANIMATIONS.attributeName}]`, { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger), easing: ANIMATIONS.easing as Easing })
-			.finished.then(() => {
-			
+		animate(`.header [${ANIMATIONS.attributeName}]`, { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger), ease: ANIMATIONS.easing as Easing, onComplete: () => {
 			inView('section,footer', ({ target }) => {
 				this.sectionsInView.push(target);
 				if (this.scrollY === 0 && target !== this.sections[0]) {
 					return;	
 				}
 
-				animate(target.querySelectorAll(`[${ANIMATIONS.attributeName}]`), { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger), easing: ANIMATIONS.easing as Easing });
+				animate(target.querySelectorAll(`[${ANIMATIONS.attributeName}]`), { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger), ease: ANIMATIONS.easing as Easing });
 				return () => this.sectionsInView.slice(this.sectionsInView.indexOf(target), 1);
 			});
 
 			inView('.sidenav,.sidebar', ({ target }) => {
-				animate(target.querySelectorAll(`[${ANIMATIONS.attributeName}]`), { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger, { start: target.classList.contains('sidebar') ? 1 : 0 }), easing: ANIMATIONS.easing as Easing });
+				animate(target.querySelectorAll(`[${ANIMATIONS.attributeName}]`), { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger, { startDelay: target.classList.contains('sidebar') ? 1 : 0 }), ease: ANIMATIONS.easing as Easing });
 				return () => animate(target.querySelectorAll(`[${ANIMATIONS.attributeName}]`), { opacity: 0, transform: ANIMATIONS.transformFrom }, { duration: 0 });
 			});
-		});
+		} });
 	}
 
 	public refresh(): void {
@@ -73,7 +71,7 @@ export class ScrollingAnimations {
 		this.sections.filter(s => s.id !== 'hero' && s.classList.contains('invisible')).forEach(section => {
 			section.classList.remove('invisible');
 			if (this.sectionsInView.includes(section)) {
-				animate(section.querySelectorAll(`[${ANIMATIONS.attributeName}]`), { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger), easing: ANIMATIONS.easing as Easing });
+				animate(section.querySelectorAll(`[${ANIMATIONS.attributeName}]`), { opacity: 1, transform: ANIMATIONS.transformTo }, { duration: ANIMATIONS.duration, delay: stagger(ANIMATIONS.stagger), ease: ANIMATIONS.easing as Easing });
 			}
 		});
 		this.sivenavItems.forEach(item => item.classList.remove('collapsed'));

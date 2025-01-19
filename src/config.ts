@@ -3,7 +3,7 @@ import customerPortalImage from './assets/images/WilmsCustomerPortal.jpg';
 import portfolioLightImage from './assets/images/PortfolioLight.jpg';
 import portfolioDarkImage from './assets/images/PortfolioDark.jpg';
 
-const name = 'Laurens Sauvillers';
+const name = 'Lauren Sauvillers';
 
 const currentYear = new Date().getFullYear();
 
@@ -15,11 +15,11 @@ const yearsOfExperience = currentYear - yearCareerStarted;
 
 export const ANIMATIONS = {
     attributeName: 'data-animate',
-    duration: 0.5,
+    duration: 0.4,
     stagger: 0.1,
-    easing: 'ease',
+    easing: 'easeOut',
     transformFrom: 'translateY(50px)',
-    transformTo: 'translateY(0)',
+    transformTo: 'translateY(0px)',
 }
 
 export const SITE = 'https://sauvillers.dev';
@@ -28,7 +28,7 @@ export const DEFAULT_THEME = 'system';
 
 const head = {
     title: name,
-    description: 'Laurens Sauvillers is a Software Engineer based in Belgium who builds and architects scalable enterprise applications consistent with industry standards using .NET, Angular, and other technologies.',
+    description: `${name} is a Software Engineer based in Belgium who builds and architects scalable enterprise applications consistent with industry standards using .NET, Angular, and other technologies.`,
     image: '/BurgEltz.jpg',
     googleAnalyticsId: 'G-KS1EG98KGE',
 }
@@ -45,7 +45,7 @@ const navItems = [
 const socials = [
     { label: 'Email', description: 'contact@sauvillers.dev', icon: 'mdi:email-outline', activeIcon: 'mdi:email', link:'mailto:contact@sauvillers.dev', color: 'primary' },
     { label: 'GitHub', description: 'GitHub.com/Sauvillers', icon: 'mdi:github', link:'https://github.com/Sauvillers', color: 'secondary' },
-    { label: 'LinkedIn', description: 'LinkedIn.com/in/Laurens-Sauvillers', icon: 'mdi:linkedin', link:'https://www.linkedin.com/in/laurens-sauvillers/', color: 'tertiary' },
+    { label: 'LinkedIn', description: 'LinkedIn.com/in/Lauren-Sauvillers', icon: 'mdi:linkedin', link:'https://www.linkedin.com/in/lauren-sauvillers/', color: 'tertiary' },
 ];
 
 const hero = {
@@ -57,7 +57,7 @@ const hero = {
       'I build and architect scalable enterprise applications consistent with industry standards using .NET, Angular, and other technologies. I thrive on turning ideas into seamless, functional realities.'
     ],
     footer: {
-        icon: 'hello',
+        icon: 'my_universe',
     },
 };
 
@@ -75,7 +75,7 @@ const about = {
         'Besides coding, I am really fascinated by our history. I love to travel around Europe to learn more about our history.',
     ],
     footer: {
-        icon: 'programming',
+        icon: 'programmer',
     },
 };
 
@@ -368,7 +368,7 @@ const contact = {
 
 const footer = {
     paragraphs: [
-        'Created by Laurens Sauvillers. Built with <a class="link" href="https://astro.build/" target="_blank">Astro 🚀</a>, <a class="link" href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a> (for easy styling), and <a class="link" href="https://motion.dev/" target="_blank">Motion One</a> (for easy animations). Illustrations by <a class="link" href="https://undraw.co/" target="_blank">unDraw</a>, and icons by <a class="link" href="https://fonts.google.com/icons" target="_blank">Google</a>. The font is Inter by <a class="link" href="https://rsms.me/inter/" target="_blank">Rasmus</a>. Source code is available on <a class="link" href="https://github.com/Loewie/portfolio" target="_blank">GitHub</a>, give it a star if you like it!',
+        `Created by ${name}. Built with <a class="link" href="https://astro.build/" target="_blank">Astro 🚀</a>, <a class="link" href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a> (for easy styling), and <a class="link" href="https://motion.dev/" target="_blank">Motion One</a> (for easy animations). Illustrations by <a class="link" href="https://undraw.co/" target="_blank">unDraw</a>, and icons by <a class="link" href="https://fonts.google.com/icons" target="_blank">Google</a>. The font is Inter by <a class="link" href="https://rsms.me/inter/" target="_blank">Rasmus</a>. Source code is available on <a class="link" href="https://github.com/Sauvillers/portfolio" target="_blank">GitHub</a>, give it a star if you like it!`,
     ],
 }
 

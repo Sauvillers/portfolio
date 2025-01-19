@@ -1,6 +1,6 @@
 # Portfolio website - sauvillers.dev
 
-This is the portfolio website of Laurens Sauvillers, which can be found here: 
+This is the portfolio website of Lauren Sauvillers, which can be found here: 
 
 [sauvillers.dev](https://sauvillers.dev/)
 
